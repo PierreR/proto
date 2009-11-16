@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml">
+    <mx:Script><![CDATA[
+        import mx.rpc.events.FaultEvent;
+        import mx.rpc.events.ResultEvent;
+
+        private function echo():void {
+            var text:String = ti.text;
+            remoteObject.echo(text);
+        }
+
+        private function resultHandler(event:ResultEvent):void {
+              ta.text += "Server responded : " + event.result + "\n";
+        }
+
+        private function faultHandler(event:FaultEvent):void {
+              ta.text += "Server fault : " + event.fault + "\n";
+        }
+        ]]>
+    </mx:Script>
+    <mx:RemoteObject id="remoteObject"
+                     destination="echoService"
+                     result="resultHandler(event);"
+                     fault="faultHandler(event);">
+                     </mx:RemoteObject>
+    <mx:Label text="Enter a text for the server to echo"></mx:Label>
+    <mx:TextInput id="ti" text="Come on Pierre"></mx:TextInput>
+    <mx:Button click="echo();" label="Send"/>
+    <mx:TextArea id="ta"></mx:TextArea>
+</mx:Application>
