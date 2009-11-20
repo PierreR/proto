@@ -3,7 +3,7 @@ package crud;
 /**
  * Date: Nov 16, 2009
  */
-public class Product {
+public class _Product {
     static final long serialVersionUID = 103844514947365244L;
 
     private int productId;
@@ -14,11 +14,11 @@ public class Product {
     private double price;
     private int qtyInStock;
 
-    public Product() {
+    public _Product() {
 
     }
 
-    public Product(int productId, String name, String description, String image, String category, double price, int qtyInStock) {
+    public _Product(int productId, String name, String description, String image, String category, double price, int qtyInStock) {
 		this.productId = productId;
 		this.name = name;
 		this.description = description;
