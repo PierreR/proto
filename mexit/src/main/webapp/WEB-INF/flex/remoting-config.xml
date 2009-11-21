@@ -9,14 +9,12 @@
     <default-channels>
         <channel ref="my-amf"/>
     </default-channels>
-    
-    <destination id="echoService">
-        <properties><source>remoting.Echo</source></properties>
-    </destination>
 
-    <destination id="crud">
+
+    <destination id="employeeSrv">
         <properties>
-            <source>crud.ProductService</source>
+            <factory>GuiceFactory</factory>
+            <source>dao._Employee</source>
         </properties>
     </destination>
 

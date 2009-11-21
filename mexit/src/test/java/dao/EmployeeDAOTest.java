@@ -7,7 +7,6 @@ import com.google.inject.matcher.Matchers;
 import com.wideplay.warp.persist.PersistenceService;
 import com.wideplay.warp.persist.UnitOfWork;
 import com.wideplay.warp.persist.jpa.JpaUnit;
-import entity.Employee;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +24,7 @@ import static junit.framework.Assert.*;
 public class EmployeeDAOTest {
 
     private Injector injector;
-    private EmployeeDAO dao;
+    private _Employee dao;
     private EntityManager em;
 
     @Before
@@ -39,10 +38,11 @@ public class EmployeeDAOTest {
                         bindConstant().annotatedWith(JpaUnit.class).to("test");
                     }
                 });
+
         injector.getInstance(PersistenceService.class)
                 .start();
 
-        dao = injector.getInstance(EmployeeDAO.class);
+        dao = injector.getInstance(_Employee.class);
         em = injector.getInstance(EntityManager.class);
 
     }
@@ -55,14 +55,14 @@ public class EmployeeDAOTest {
 
     @Test
     public void getEmployees() {
-        Collection<Employee> employees = dao.getEmployees();
+        Collection<entity.Employee> employees = dao.getEmployees();
         assertFalse(employees.isEmpty());
     }
     @Test
     public void getByCompany() {
-        Collection<Employee> employees = dao.getByCompany("Google");
+        Collection<entity.Employee> employees = dao.getByCompany("Google");
         assertFalse(employees.isEmpty());
-        Employee employee = employees.iterator().next();
+        entity.Employee employee = employees.iterator().next();
         assertEquals("Sam", employee.getFirstName());
     }
 }

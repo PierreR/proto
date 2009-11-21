@@ -2,25 +2,25 @@ package dao;
 
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import entity.Employee;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Date: Nov 18, 2009
  */
-public class EmployeeDAO {
+public class _Employee {
     @Inject
-    private EntityManager em;
+    private Provider<EntityManager> em;
 
     
     public Collection<Employee> getEmployees() {
 
-        Query q = em.createQuery("SELECT e FROM Employee e");
+        Query q = em.get().createQuery("SELECT e FROM Employee e");
 
         Collection<Employee> resultList = q.getResultList();
 
@@ -32,7 +32,7 @@ public class EmployeeDAO {
     }
 
     public Collection<Employee> getByCompany(String companyName)  {
-        Query q = em.createQuery("select e from Employee e join e.company c where c.name='Google'");
+        Query q = em.get().createQuery("select e from Employee e join e.company c where c.name='Google'");
 
         return q.getResultList();
 

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <services-config>
 
+    <factories>
+        <factory id="GuiceFactory" class="web.GuiceFactory"/>
+    </factories>
+
     <services>
         <service-include file-path="remoting-config.xml" />
         <service-include file-path="proxy-config.xml" />
@@ -92,5 +96,7 @@
              -->
         </redeploy>
     </system>
+
+    
 
 </services-config>
