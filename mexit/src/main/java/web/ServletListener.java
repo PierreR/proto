@@ -10,9 +10,8 @@ import com.google.inject.servlet.ServletModule;
 import com.wideplay.warp.persist.PersistenceService;
 import com.wideplay.warp.persist.UnitOfWork;
 import com.wideplay.warp.persist.jpa.JpaUnit;
+import dao.EmployeeDAO;
 import flex.messaging.MessageBrokerServlet;
-
-import java.util.*;
 
 /**
  * Date: Nov 20, 2009
@@ -23,7 +22,8 @@ public class ServletListener extends GuiceServletContextListener {
     protected Injector getInjector() {
         Injector injector = Guice.createInjector(PersistenceService.usingJpa()
                 .across(UnitOfWork.REQUEST)
-                .forAll(Matchers.inSubpackage("dao"))
+                .forAll(Matchers.inSubpackage("srv"))
+                .addAccessor(EmployeeDAO.class)  // try to group common interfaces here !!
                 .buildModule(),
                 new ServletModule() {
                     @Override

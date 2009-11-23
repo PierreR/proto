@@ -3,15 +3,14 @@ package dao;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.matcher.Matchers;
 import com.wideplay.warp.persist.PersistenceService;
 import com.wideplay.warp.persist.UnitOfWork;
 import com.wideplay.warp.persist.jpa.JpaUnit;
-import org.junit.After;
+import entity.Employee;
 import org.junit.Before;
 import org.junit.Test;
-
-import javax.persistence.EntityManager;
+import dao.EmployeeDAO;
+import srv.EmployeeSRV;
 import java.util.*;
 
 import static junit.framework.Assert.*;
@@ -24,14 +23,13 @@ import static junit.framework.Assert.*;
 public class EmployeeDAOTest {
 
     private Injector injector;
-    private _Employee dao;
-    private EntityManager em;
+    private EmployeeSRV srv;
 
     @Before
     public void pre() {
         injector = Guice.createInjector(PersistenceService.usingJpa()
                 .across(UnitOfWork.TRANSACTION)
-                .forAll(Matchers.any())
+                .addAccessor(EmployeeDAO.class)
                 .buildModule(),
                 new AbstractModule() {
                     protected void configure() {
@@ -42,27 +40,20 @@ public class EmployeeDAOTest {
         injector.getInstance(PersistenceService.class)
                 .start();
 
-        dao = injector.getInstance(_Employee.class);
-        em = injector.getInstance(EntityManager.class);
+        srv = injector.getInstance(EmployeeSRV.class);
 
-    }
-
-    @After
-    public final void post() {
-        em.close();
     }
 
 
     @Test
     public void getEmployees() {
-        Collection<entity.Employee> employees = dao.getEmployees();
+        Collection<entity.Employee> employees = srv.listAll();
         assertFalse(employees.isEmpty());
     }
     @Test
     public void getByCompany() {
-        Collection<entity.Employee> employees = dao.getByCompany("Google");
-        assertFalse(employees.isEmpty());
-        entity.Employee employee = employees.iterator().next();
-        assertEquals("Sam", employee.getFirstName());
+        Collection<Employee> employees = srv.findByCompanyName("Google");
+        assertFalse(employees.isEmpty());            
+        assertEquals("Sam", employees.iterator().next().getFirstName());
     }
 }

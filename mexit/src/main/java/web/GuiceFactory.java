@@ -10,7 +10,10 @@ import flex.messaging.config.ConfigMap;
 import flex.messaging.services.ServiceException;
 
 /**
+ * This code is a largely inspired (if not pasted) from <a href="http://fponchel.developpez.com/tutoriel/flex3/integration/blazeds-spring/">Jeff Vroom's SpringFactory</a>.
+ *
  * Date: Nov 21, 2009
+ *
  */
 public class GuiceFactory implements FlexFactory {
   private static final String SOURCE = "source";
