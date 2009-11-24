@@ -1,13 +1,14 @@
 package web;
 
-import java.util.*;
-
 import com.google.inject.Injector;
 import flex.messaging.FactoryInstance;
 import flex.messaging.FlexContext;
 import flex.messaging.FlexFactory;
 import flex.messaging.config.ConfigMap;
 import flex.messaging.services.ServiceException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This code is a largely inspired (if not pasted) from <a href="http://fponchel.developpez.com/tutoriel/flex3/integration/blazeds-spring/">Jeff Vroom's SpringFactory</a>.

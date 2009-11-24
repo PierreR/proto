@@ -1,4 +1,4 @@
-package dao;
+package srv;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -6,11 +6,10 @@ import com.google.inject.Injector;
 import com.wideplay.warp.persist.PersistenceService;
 import com.wideplay.warp.persist.UnitOfWork;
 import com.wideplay.warp.persist.jpa.JpaUnit;
+import dao.EmployeeDAO;
 import entity.Employee;
 import org.junit.Before;
 import org.junit.Test;
-import dao.EmployeeDAO;
-import srv.EmployeeSRV;
 import java.util.*;
 
 import static junit.framework.Assert.*;
@@ -20,7 +19,7 @@ import static junit.framework.Assert.*;
 /**
  * Date: Nov 18, 2009
  */
-public class EmployeeDAOTest {
+public class EmployeeSRVTest {
 
     private Injector injector;
     private EmployeeSRV srv;

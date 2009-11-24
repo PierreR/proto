@@ -24,4 +24,8 @@
 		<filter-class>com.wideplay.warp.persist.PersistenceFilter</filter-class>
 	</filter>
 
+    <welcome-file-list>
+        <welcome-file>Wrapper.html</welcome-file>
+    </welcome-file-list>
+
 </web-app>
